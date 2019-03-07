@@ -11,6 +11,7 @@
     using System.Windows.Forms;
 
     using ImageCurator.Helpers;
+    using ImageCurator.Resources;
 
     public partial class frmCuratorMain : Form
     {
@@ -21,6 +22,24 @@
             InitializeComponent();
 
             this.settingsProvider = new UserSettingsProvider();
+            this.settingsProvider.SettingUpdated += this.SettingsProvider_SettingUpdated;
+        }
+
+        private void SettingsProvider_SettingUpdated(object sender, CustomEvents.SettingUpdatedEventArgs args)
+        {
+            switch (args.SettingName)
+            {
+                case Constants.Configuration.ROOT_PATH:
+
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        private void Ui_UpdateRootDirectory()
+        {
+            this.tsRootDirectoryLabel.Text = this.settingsProvider.RootPath;
         }
 
         private void tsRootFolderButton_Click(object sender, EventArgs e)

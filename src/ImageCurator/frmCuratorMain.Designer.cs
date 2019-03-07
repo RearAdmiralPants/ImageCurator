@@ -32,7 +32,7 @@
             this.bottomToolstrip = new System.Windows.Forms.ToolStrip();
             this.tsRootFolderButton = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
+            this.tsRootDirectoryLabel = new System.Windows.Forms.ToolStripLabel();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripProgressBar1 = new System.Windows.Forms.ToolStripProgressBar();
             this.folderBrowser = new System.Windows.Forms.FolderBrowserDialog();
@@ -45,7 +45,7 @@
             this.bottomToolstrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tsRootFolderButton,
             this.toolStripSeparator1,
-            this.toolStripLabel1,
+            this.tsRootDirectoryLabel,
             this.toolStripSeparator2,
             this.toolStripProgressBar1});
             this.bottomToolstrip.Location = new System.Drawing.Point(0, 425);
@@ -69,11 +69,10 @@
             this.toolStripSeparator1.Name = "toolStripSeparator1";
             this.toolStripSeparator1.Size = new System.Drawing.Size(6, 25);
             // 
-            // toolStripLabel1
+            // tsRootDirectoryLabel
             // 
-            this.toolStripLabel1.Name = "toolStripLabel1";
-            this.toolStripLabel1.Size = new System.Drawing.Size(86, 22);
-            this.toolStripLabel1.Text = "toolStripLabel1";
+            this.tsRootDirectoryLabel.Name = "tsRootDirectoryLabel";
+            this.tsRootDirectoryLabel.Size = new System.Drawing.Size(0, 22);
             // 
             // toolStripSeparator2
             // 
@@ -105,7 +104,7 @@
         private System.Windows.Forms.ToolStrip bottomToolstrip;
         private System.Windows.Forms.ToolStripButton tsRootFolderButton;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
-        private System.Windows.Forms.ToolStripLabel toolStripLabel1;
+        private System.Windows.Forms.ToolStripLabel tsRootDirectoryLabel;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.ToolStripProgressBar toolStripProgressBar1;
         private System.Windows.Forms.FolderBrowserDialog folderBrowser;

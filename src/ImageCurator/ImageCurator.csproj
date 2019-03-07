@@ -46,6 +46,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CustomEvents\SettingUpdatedEventArgs.cs" />
     <Compile Include="frmCuratorMain.cs">
       <SubType>Form</SubType>
     </Compile>
