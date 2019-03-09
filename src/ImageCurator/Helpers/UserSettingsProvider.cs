@@ -53,27 +53,6 @@
             this.settingBase.Reload();
         }
 
-        /*
-         * ApplicationSettingsBase settings = passed_in;
-SettingsProvider sp = settings.Providers["LocalFileSettingsProvider"];
-SettingsProperty p = new SettingsProperty("your_prop_name");
-your_class conf = null;
-p.PropertyType = typeof( your_class );
-p.Attributes.Add(typeof(UserScopedSettingAttribute),new UserScopedSettingAttribute());
-p.Provider = sp;
-p.SerializeAs = SettingsSerializeAs.Xml;
-SettingsPropertyValue v = new SettingsPropertyValue( p );
-settings.Properties.Add( p );
-
-settings.Reload();
-conf = (your_class)settings["your_prop_name"];
-if( conf == null )
-{
-   settings["your_prop_name"] = conf = new your_class();
-   settings.Save();
-}
-*/
-
         public string RootPath
         {
             get
@@ -88,16 +67,6 @@ if( conf == null )
 
         private void SetSettingValue(string settingName, string settingValue)
         {
-            /*
-            if (!SettingsPropertyExists(settingName))
-            {
-                var prop = new System.Configuration.SettingsProperty(settingName);
-                Properties.Settings.Default.Properties.Add(prop);
-            }
-            Properties.Settings.Default.Properties[settingName] = settingValue;
-            */
-
-            //this.settingBase.Properties[settingName] = settingValue;
             var property = this.settingBase.Properties[settingName];
             var newValue = new SettingsPropertyValue(property);
             newValue.PropertyValue = settingValue;
@@ -107,20 +76,6 @@ if( conf == null )
             var args = new SettingUpdatedEventArgs(settingName, settingValue);
             this.OnSettingUpdated(args);
         }
-
-        /*
-        private bool SettingsPropertyExists(string settingName)
-        {
-            foreach (var property in Properties.Settings.Default.Properties)
-            {
-                if (property.ToString() == settingName)
-                {
-                    return true;
-                }
-            }
-            return false;
-        }
-        */
 
         private void ForceSave()
         {
