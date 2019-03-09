@@ -23,6 +23,7 @@
 
             this.settingsProvider = new UserSettingsProvider();
             this.settingsProvider.SettingUpdated += this.SettingsProvider_SettingUpdated;
+            
         }
 
         private void SettingsProvider_SettingUpdated(object sender, CustomEvents.SettingUpdatedEventArgs args)
@@ -30,7 +31,7 @@
             switch (args.SettingName)
             {
                 case Constants.Configuration.ROOT_PATH:
-
+                    this.tsRootDirectoryLabel.Text = args.SettingValue;
                     break;
                 default:
                     break;
