@@ -50,5 +50,10 @@
                 this.settingsProvider.RootPath = this.folderBrowser.SelectedPath;
             }
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show(this.settingsProvider.RootPath);
+        }
     }
 }
