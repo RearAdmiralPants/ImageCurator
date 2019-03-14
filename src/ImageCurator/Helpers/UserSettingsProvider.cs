@@ -22,7 +22,9 @@
 
         public UserSettingsProvider()
         {
-            this.Initialize();
+            //this.Initialize();
+            this.settingBase.Upgrade();
+            this.settingBase.Reload();
         }
 
         /// <summary>
@@ -78,6 +80,10 @@
 
             var newProp = new SettingsProperty(settingName);
             newProp.PropertyType = typeof(string);
+            newProp.IsReadOnly = false;
+            newProp.Provider = Properties.Settings.Default.Providers["LocalFileSettingsProvider"];
+            newProp.Attributes.Add(typeof(UserScopedSettingAttribute), new UserScopedSettingAttribute());
+
             var newValue = new SettingsPropertyValue(newProp);
 
             this.settingBase.Properties.Add(newProp);
@@ -91,12 +97,14 @@
         {
             get
             {
-                var shit = this.settingBase[Constants.Configuration.ROOT_PATH];
-                return (string)this.settingBase[Constants.Configuration.ROOT_PATH];
+                var shit = this.settingBase.PropertyValues[Constants.Configuration.ROOT_PATH];
+                //return (string)this.settingBase[Constants.Configuration.ROOT_PATH];
+                return (string)shit.PropertyValue;
             }
             set
             {
-                this.setSettingValue(Constants.Configuration.ROOT_PATH, value);
+                //this.setSettingValue(Constants.Configuration.ROOT_PATH, value);
+                this.SetDynamicSetting(Constants.Configuration.ROOT_PATH, value);
             }
         }
 
@@ -120,8 +128,10 @@
             var property = this.settingBase.Properties[settingName];
             var newValue = new SettingsPropertyValue(property);
             newValue.PropertyValue = settingValue;
+            this.settingBase.PropertyValues.Add(newValue);
 
             this.settingBase.Save();
+            // this.settingBase.Reload();
 
             // Raise updated event
             var args = new SettingUpdatedEventArgs(settingName, settingValue);

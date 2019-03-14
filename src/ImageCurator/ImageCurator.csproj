@@ -34,6 +34,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -53,6 +54,7 @@
     <Compile Include="frmCuratorMain.Designer.cs">
       <DependentUpon>frmCuratorMain.cs</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\TheSettingsProvider.cs" />
     <Compile Include="Helpers\UserSettingsProvider.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
