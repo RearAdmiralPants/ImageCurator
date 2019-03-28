@@ -5,7 +5,7 @@
     {
         public class Configuration
         {
-            public const string ROOT_PATH = "Constants.Configuration.RootPath";
+            public const string ROOT_IMAGE_PATH = "Constants.Configuration.RootImagePath";
         }
 
         /// <summary>

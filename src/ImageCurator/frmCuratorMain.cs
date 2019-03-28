@@ -15,13 +15,13 @@
 
     public partial class frmCuratorMain : Form
     {
-        private UserSettingsProvider settingsProvider;
+        private OldUserSettingsProvider settingsProvider;
 
         public frmCuratorMain()
         {
             InitializeComponent();
 
-            this.settingsProvider = new UserSettingsProvider();
+            this.settingsProvider = new OldUserSettingsProvider();
             this.settingsProvider.SettingUpdated += this.SettingsProvider_SettingUpdated;
             
         }

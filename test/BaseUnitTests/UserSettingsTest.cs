@@ -9,11 +9,11 @@
     [TestClass]
     public class UserSettingsTest
     {
-        private UserSettingsProvider userProvider;
+        private OldUserSettingsProvider userProvider;
 
         public UserSettingsTest()
         {
-            this.userProvider = new UserSettingsProvider();
+            this.userProvider = new OldUserSettingsProvider();
         }
 
         [TestMethod]

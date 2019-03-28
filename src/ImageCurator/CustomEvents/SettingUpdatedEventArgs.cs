@@ -1,21 +1,17 @@
 ﻿namespace ImageCurator.CustomEvents
 {
     using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
-    using System.Threading.Tasks;
 
     public class SettingUpdatedEventArgs : EventArgs
     {
-        public SettingUpdatedEventArgs(string settingName, string newValue)
+        public SettingUpdatedEventArgs(string settingName, object newValue)
         {
             this._settingName = settingName;
             this._settingNewValue = newValue;
         }
 
         private string _settingName;
-        private string _settingNewValue;
+        private object _settingNewValue;
 
         public string SettingName
         {
@@ -25,7 +21,7 @@
             }
         }
 
-        public string SettingValue
+        public object SettingValue
         {
             get
             {
