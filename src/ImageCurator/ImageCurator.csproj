@@ -57,8 +57,6 @@
     <Compile Include="frmCuratorMain.Designer.cs">
       <DependentUpon>frmCuratorMain.cs</DependentUpon>
     </Compile>
-    <Compile Include="Helpers\TheSettingsProvider.cs" />
-    <Compile Include="Helpers\OldUserSettingsProvider.cs" />
     <Compile Include="Helpers\UserSettingsProvider.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
