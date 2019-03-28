@@ -104,6 +104,8 @@
             this.Controls.Add(this.bottomToolstrip);
             this.Name = "frmCuratorMain";
             this.Text = "Image Curator";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmCuratorMain_FormClosing);
+            this.Shown += new System.EventHandler(this.frmCuratorMain_Shown);
             this.bottomToolstrip.ResumeLayout(false);
             this.bottomToolstrip.PerformLayout();
             this.ResumeLayout(false);

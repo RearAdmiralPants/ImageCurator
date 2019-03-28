@@ -25,8 +25,39 @@
 
         public UserSettingsProvider()
         {
-            this.Initialize();
         }
+
+        /// <summary>
+        /// Gets or sets the root image path that the application will do work upon.
+        /// </summary>
+        /// <remarks>Still uncertain whether app settings should be managed with explicit properties like these, using
+        /// so-called Generic settings for temporary settings or settings of no interest to the user, or if all settings
+        /// might as well use the latter framework.</remarks>
+        public string RootPath
+        {
+            get
+            {
+                var rootPath = this.GetGenericSetting(Constants.Configuration.ROOT_IMAGE_PATH);
+                if (rootPath != null)
+                {
+                    return (string)rootPath;
+                }
+                return null;
+            }
+            set
+            {
+                this.SetGenericSetting(Constants.Configuration.ROOT_IMAGE_PATH, value);
+            }
+        }
+
+        public void Initialize()
+        {
+            this.settingBase.Upgrade();
+            this.settingBase.Reload();
+
+            this.initialLoadSettings();
+        }
+
 
         public void SetGenericSetting(string settingName, object settingValue)
         {
@@ -90,14 +121,6 @@
             this.settingBase.AppSettings = toSave;
 
             this.settingBase.Save();
-        }
-
-        private void Initialize()
-        {
-            this.settingBase.Upgrade();
-            this.settingBase.Reload();
-
-            this.initialLoadSettings();
         }
 
         public event SettingUpdatedEventHandler SettingUpdated;

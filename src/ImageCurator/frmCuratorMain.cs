@@ -15,15 +15,11 @@
 
     public partial class frmCuratorMain : Form
     {
-        private OldUserSettingsProvider settingsProvider;
+        private UserSettingsProvider settingsProvider;
 
         public frmCuratorMain()
         {
-            InitializeComponent();
-
-            this.settingsProvider = new OldUserSettingsProvider();
-            this.settingsProvider.SettingUpdated += this.SettingsProvider_SettingUpdated;
-            
+            InitializeComponent();            
         }
 
         private void SettingsProvider_SettingUpdated(object sender, CustomEvents.SettingUpdatedEventArgs args)
@@ -54,6 +50,18 @@
         private void button1_Click(object sender, EventArgs e)
         {
             MessageBox.Show(this.settingsProvider.RootPath);
+        }
+
+        private void frmCuratorMain_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            this.settingsProvider.Save();
+        }
+
+        private void frmCuratorMain_Shown(object sender, EventArgs e)
+        {
+            this.settingsProvider = new UserSettingsProvider();
+            this.settingsProvider.SettingUpdated += this.SettingsProvider_SettingUpdated;
+            this.settingsProvider.Initialize();
         }
     }
 }
