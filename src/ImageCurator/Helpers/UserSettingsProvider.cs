@@ -1,8 +1,6 @@
 ﻿namespace ImageCurator.Helpers
 {
     using System.Collections.Generic;
-    using System.Configuration;
-    using System.Linq;
 
     using ImageCurator.Resources;
     using ImageCurator.CustomEvents;
@@ -45,6 +43,11 @@
             return this.getSetting(settingName);
         }
 
+        public void Save()
+        {
+            this.saveSettings();
+        }
+
         private object getSetting(string settingName)
         {
             if (this.appSettings.ContainsKey(settingName))
@@ -69,11 +72,15 @@
         private void loadSettings()
         {
             var json = this.settingBase.AppSettings;
-            var settingsDict = (Dictionary<string, object>)JsonConvert.DeserializeObject(json);
+            var settingsObject = JsonConvert.DeserializeObject(json, typeof(Dictionary<string, object>));
+            var settingsDict = (Dictionary<string, object>)settingsObject;
 
-            foreach (var key in new List<string>(settingsDict.Keys))
+            if (settingsDict != null)
             {
-                this.SetGenericSetting(key, settingsDict[key]);
+                foreach (var key in new List<string>(settingsDict.Keys))
+                {
+                    this.SetGenericSetting(key, settingsDict[key]);
+                }
             }
         }
 

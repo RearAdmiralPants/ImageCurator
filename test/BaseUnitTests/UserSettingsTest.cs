@@ -9,19 +9,11 @@
     [TestClass]
     public class UserSettingsTest
     {
-        private OldUserSettingsProvider userProvider;
+        private UserSettingsProvider userProvider;
 
         public UserSettingsTest()
         {
-            this.userProvider = new OldUserSettingsProvider();
-        }
-
-        [TestMethod]
-        public void VerifyConstantsSettingCreation()
-        {
-            var curatorConstants = new Constants();
-
-            Assert.IsTrue(this.userProvider.SettingExists(Constants.Configuration.ROOT_PATH));
+            this.userProvider = new UserSettingsProvider();
         }
 
         [TestMethod]
@@ -29,26 +21,27 @@
         {
             var randomSetting = "22039h5803298hg0298hg";
 
-            Assert.IsFalse(this.userProvider.SettingExists(randomSetting));
+            Assert.IsNull(this.userProvider.GetGenericSetting(randomSetting));
         }
 
         [TestMethod]
         public void VerifyConstantSettingValue()
         {
-            string currentValue = null;
-            if (this.userProvider.SettingExists(Constants.Configuration.ROOT_PATH))
+            var settingValue = this.userProvider.GetGenericSetting(Constants.Configuration.ROOT_IMAGE_PATH);
+            string currentRootPath = null;
+            if (settingValue != null)
             {
-                currentValue = this.userProvider.RootPath;
+                currentRootPath = (string)settingValue;
             }
 
             var newRootPath = "New Root Path";
-            this.userProvider.RootPath = newRootPath;
+            this.userProvider.SetGenericSetting(Constants.Configuration.ROOT_IMAGE_PATH, newRootPath);
 
-            Assert.IsTrue(this.userProvider.RootPath == newRootPath);
+            Assert.IsTrue((string)this.userProvider.GetGenericSetting(Constants.Configuration.ROOT_IMAGE_PATH) == newRootPath);
 
-            if (!(currentValue is null))
+            if (!(currentRootPath is null))
             {
-                this.userProvider.RootPath = currentValue;
+                this.userProvider.SetGenericSetting(Constants.Configuration.ROOT_IMAGE_PATH, currentRootPath);
             }
         }
 
@@ -56,12 +49,31 @@
         public void VerifyDynamicSettingCreated()
         {
             var dynamicSetting = "2903jf0329hg0";
-            var dynamicValue = "Test Value";
-            this.userProvider.SetDynamicSetting(dynamicSetting, dynamicValue);
+            int dynamicValue = 92;
+            this.userProvider.SetGenericSetting(dynamicSetting, dynamicValue);
 
-            Assert.IsTrue(this.userProvider.SettingExists(dynamicSetting));
-            var pants = this.userProvider.GetDynamicSetting(dynamicSetting);
-            Assert.AreEqual(this.userProvider.GetDynamicSetting(dynamicSetting), dynamicValue);
+            var settingValue = this.userProvider.GetGenericSetting(dynamicSetting);
+            var settingType = settingValue.GetType();
+            Assert.IsInstanceOfType(settingValue, typeof(int));
+            var settingInt = (int)settingValue;
+            Assert.AreEqual(dynamicValue, settingInt);
+        }
+
+        [TestMethod]
+        public void UserSettingsPersist()
+        {
+            var testSetting = "TestSettingPersist";
+            var testValue = "TestSettingPersistValue";
+
+            this.userProvider.SetGenericSetting(testSetting, testValue);
+            this.userProvider.Save();
+
+            var newProvider = new UserSettingsProvider();
+
+            var testPersistence = (string)newProvider.GetGenericSetting(testSetting);
+
+            Assert.IsNotNull(testPersistence);
+            Assert.AreEqual(testValue, testPersistence);
         }
     }
 }

@@ -30,8 +30,8 @@
         {
             switch (args.SettingName)
             {
-                case Constants.Configuration.ROOT_PATH:
-                    this.tsRootDirectoryLabel.Text = args.SettingValue;
+                case Constants.Configuration.ROOT_IMAGE_PATH:
+                    this.tsRootDirectoryLabel.Text = (string)args.SettingValue;
                     break;
                 default:
                     break;
